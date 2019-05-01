@@ -1,8 +1,9 @@
 const path = require('path');
 const router = require('express').Router();
+const nytQuery = require('./api/nytQuery');
 
 //API routes
-//soon...
+router.use('/api', nytQuery);
 
 // If no API routes are hit, send the React app
 router.use(function(req, res) {
