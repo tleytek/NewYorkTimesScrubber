@@ -1,7 +1,7 @@
 import React from 'react';
 import API from '../utils/API';
 import SearchCard from './SearchCard';
-
+import Articles from './Articles';
 class App extends React.Component {
   state = { articles: [] };
 
@@ -15,6 +15,7 @@ class App extends React.Component {
     return (
       <div className="container">
         <SearchCard onSubmit={this.onSearchSubmit} />
+        <Articles searchedArticles={this.state.articles} />
       </div>
     );
   }
