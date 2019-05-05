@@ -12,8 +12,8 @@ class SearchCard extends React.Component {
 
   render() {
     return (
-      <div className="card">
-        <form onSubmit={this.onFormSubmit}>
+      <div className="card my-3">
+        <form className="card-body" onSubmit={this.onFormSubmit}>
           <label>New York Times Search</label>
           <input
             type="text"
