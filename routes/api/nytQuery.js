@@ -10,7 +10,18 @@ nytQuery.post('/searchArticles', async (req, res) => {
         q: req.body.searchTerm
       }
     })
-    .then(result => res.send(result.data.response.docs))
+    .then(result => {
+      const articleData = result.data.response.docs.map(({ _id, headline, pub_date, web_url }) => {
+        //_id, headline.main, pub_date, web_url
+        return {
+          _id,
+          headline,
+          pub_date,
+          web_url
+        };
+      });
+      res.send(articleData);
+    })
     .catch(error => res.send(error));
 });
 
