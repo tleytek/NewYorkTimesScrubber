@@ -7,7 +7,9 @@ const Articles = ({ searchedArticles }) => {
     return (
       <div className="list-group-item" key={article._id}>
         <div className="row justify-content-between align-items-center">
-          <div>{article.headline.main}</div>
+          <a className="alert-link" href={article.web_url} rel="noopener noreferrer" target="_blank">
+            {article.headline.main}
+          </a>
           <button type="button" className="btn btn-primary" onClick={() => saveArticle(article)}>
             Save
           </button>
