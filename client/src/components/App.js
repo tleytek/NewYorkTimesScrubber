@@ -11,11 +11,15 @@ class App extends React.Component {
     API.searchArticles({ searchTerm }).then(response => this.setState({ articles: response.data }));
   };
 
+  onSaveSubmit = article => {
+    console.log(article);
+  };
+
   render() {
     return (
       <div className="container">
         <SearchCard onSubmit={this.onSearchSubmit} />
-        <Articles searchedArticles={this.state.articles} />
+        <Articles searchedArticles={this.state.articles} saveArticle={this.onSaveSubmit} />
       </div>
     );
   }
