@@ -1,8 +1,6 @@
 import React from 'react';
 
-const Articles = ({ searchedArticles }) => {
-  const saveArticle = article => console.log(article);
-
+const Articles = ({ searchedArticles, saveArticle }) => {
   const renderArticleList = searchedArticles.map(article => {
     return (
       <div className="list-group-item" key={article._id}>
