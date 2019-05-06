@@ -6,7 +6,16 @@ const Articles = ({ searchedArticles }) => {
   });
 
   const articlesDisplay = searchedArticles.map(article => {
-    return <li className="list-group-item">{article.headline.main}</li>;
+    return (
+      <div className="list-group-item">
+        <div className="row justify-content-between align-items-center">
+          <div>{article.headline.main}</div>
+          <button type="button" className="btn btn-primary">
+            Save
+          </button>
+        </div>
+      </div>
+    );
   });
 
   return (
@@ -14,6 +23,7 @@ const Articles = ({ searchedArticles }) => {
       <div className="card-header">Searced Articles</div>
       <ul className="list-group list-group-flush">{articlesDisplay}</ul>
       {articles}
+      <div />
     </div>
   );
 };
