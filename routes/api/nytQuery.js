@@ -11,12 +11,11 @@ nytQuery.post('/searchArticles', async (req, res) => {
       }
     })
     .then(result => {
-      const articleData = result.data.response.docs.map(({ _id, headline, pub_date, web_url }) => {
+      const articleData = result.data.response.docs.map(({ _id, headline, web_url }) => {
         //_id, headline.main, pub_date, web_url
         return {
           _id,
           headline,
-          pub_date,
           web_url
         };
       });
