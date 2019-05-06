@@ -1,16 +1,14 @@
 import React from 'react';
 
 const Articles = ({ searchedArticles }) => {
-  const articles = searchedArticles.map(article => {
-    return console.log(article);
-  });
+  const saveArticle = article => console.log(article);
 
-  const articlesDisplay = searchedArticles.map(article => {
+  const renderArticleList = searchedArticles.map(article => {
     return (
-      <div className="list-group-item">
+      <div className="list-group-item" key={article._id}>
         <div className="row justify-content-between align-items-center">
           <div>{article.headline.main}</div>
-          <button type="button" className="btn btn-primary">
+          <button type="button" className="btn btn-primary" onClick={() => saveArticle(article)}>
             Save
           </button>
         </div>
@@ -21,8 +19,7 @@ const Articles = ({ searchedArticles }) => {
   return (
     <div className="card">
       <div className="card-header">Searced Articles</div>
-      <ul className="list-group list-group-flush">{articlesDisplay}</ul>
-      {articles}
+      <ul className="list-group list-group-flush">{renderArticleList}</ul>
       <div />
     </div>
   );
