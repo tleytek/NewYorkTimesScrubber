@@ -1,9 +1,10 @@
 require('dotenv').config();
 const axios = require('axios');
+const db = require('../models');
 const NYT_ID = process.env.NYT_ID;
 
 module.exports = {
-  articleSearch: async (req, res) => {
+  articleSearch: (req, res) => {
     axios
       .get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${NYT_ID}`, {
         params: {
@@ -22,5 +23,9 @@ module.exports = {
         res.send(articleData);
       })
       .catch(error => res.send(error));
+  },
+  saveArticle: (req, res) => {
+    // console.log(req.body);
+    db.Article.create(req.body);
   }
 };
