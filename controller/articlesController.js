@@ -27,5 +27,11 @@ module.exports = {
   saveArticle: (req, res) => {
     // console.log(req.body);
     db.Article.create(req.body);
+  },
+  getArticles: (req, res) => {
+    db.Article.find({})
+      .sort({ date: -1 })
+      .then(savedArticles => res.json(savedArticles))
+      .catch(err => res.status(422).json(err));
   }
 };
