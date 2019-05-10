@@ -19,6 +19,10 @@ class App extends React.Component {
     });
   };
 
+  deleteArticle = id => {
+    API.deleteArticle(id).then(res => this.loadSavedArticles());
+  };
+
   /* The onSearchSubmit function calls the searchArticles function and in 
    the promise we set the articles state to the response of searchArticles */
   onSearchSubmit = searchTerm => {
@@ -50,7 +54,7 @@ class App extends React.Component {
           savedArticles={this.state.savedArticles}
           searchState={this.state.searching}
         />
-        <SavedArticlesCard savedArticles={this.state.savedArticles} />
+        <SavedArticlesCard savedArticles={this.state.savedArticles} deleteArticle={this.deleteArticle} />
       </div>
     );
   }

@@ -33,5 +33,10 @@ module.exports = {
       .sort({ date: -1 })
       .then(savedArticles => res.json(savedArticles))
       .catch(err => res.status(422).json(err));
+  },
+  remove: (req, res) => {
+    db.Article.findById(req.params.id)
+      .then(result => result.remove())
+      .then(result => res.json(result));
   }
 };

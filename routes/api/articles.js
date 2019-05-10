@@ -6,4 +6,6 @@ router
   .post(articlesController.saveArticle)
   .get(articlesController.getArticles);
 
+router.route('/:id').delete(articlesController.remove);
+
 module.exports = router;
