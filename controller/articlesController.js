@@ -5,10 +5,13 @@ const NYT_ID = process.env.NYT_ID;
 
 module.exports = {
   articleSearch: (req, res) => {
+    console.log(req.body.startYear + '0101');
     axios
       .get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${NYT_ID}`, {
         params: {
-          q: req.body.searchTerm
+          q: req.body.searchTerm,
+          begin_date: req.body.startYear + '0101',
+          end_date: req.body.endYear + '1231'
         }
       })
       .then(result => {
