@@ -18,7 +18,7 @@ const SavedArticlesCard = ({ savedArticles, deleteArticle }) => {
   });
 
   return (
-    <div className="card my-3">
+    <div className="card">
       <div className="card-header">Saved Articles</div>
       <ul className="list-group list-group-flush">{savedArticles.length > 0 ? renderList : <Spinner />}</ul>
     </div>
