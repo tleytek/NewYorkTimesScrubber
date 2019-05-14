@@ -121,7 +121,7 @@ class Home extends React.Component {
 
           <List>{this.searchStatus(searching, articles)}</List>
         </Card>
-        <SavedArticlesCard savedArticles={this.state.savedArticles} deleteArticle={this.deleteArticle} />
+        {/* <SavedArticlesCard savedArticles={this.state.savedArticles} deleteArticle={this.deleteArticle} /> */}
       </Container>
     );
   }
