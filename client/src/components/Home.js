@@ -4,6 +4,7 @@ import { Row } from './Grid';
 import { Card, CardHeader, CardBody } from './Card';
 import { FormButton, Input } from './Input';
 import { List, ListItem, ListSpinner, ListLink, ListButton } from './List';
+import { socket } from '../App';
 class Home extends React.Component {
   state = {
     searchTerm: '',
@@ -19,9 +20,8 @@ class Home extends React.Component {
   }
 
   getArticles = () => {
-    API.getArticles().then(res => {
-      this.setState({ savedArticles: res.data });
-    });
+    socket.emit('getAllArticlesReq');
+    socket.on('getAllArticlesRes', data => this.setState({ savedArticles: data }));
   };
 
   handleInputChange = event => {
@@ -42,11 +42,8 @@ class Home extends React.Component {
   };
 
   saveArticle = article => {
-    console.log('imworking');
-    API.saveArticle({
-      title: article.title,
-      url: article.url
-    }).then(this.getArticles());
+    socket.emit('saveArticleReq', article);
+    this.getArticles();
   };
 
   duplicatePrevention = currentArticleUrl => {

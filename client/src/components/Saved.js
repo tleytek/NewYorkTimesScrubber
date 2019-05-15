@@ -3,6 +3,7 @@ import API from '../utils/API';
 import { Row } from './Grid';
 import { Card, CardHeader, CardBody } from './Card';
 import { List, ListItem, ListSpinner, ListLink, ListButton } from './List';
+import { socket } from '../App';
 
 class Saved extends React.Component {
   state = {
@@ -11,14 +12,19 @@ class Saved extends React.Component {
   };
 
   componentDidMount() {
+    // socket.emit('dataRequestFromClient');
     this.getArticles();
+    // socket.on('dataResponseFromServer', data => this.setState({ savedArticles: data }));
   }
 
   getArticles = () => {
     this.setState({ loadingArticles: true });
-    API.getArticles().then(res => {
-      this.setState({ loadingArticles: false, savedArticles: res.data });
-    });
+    socket.emit('getAllArticlesReq');
+    socket.on('getAllArticlesRes', data => this.setState({ savedArticles: data, loadingArticles: false }));
+
+    // API.getArticles().then(res => {
+    //   this.setState({ loadingArticles: false, savedArticles: res.data });
+    // });
   };
 
   deleteArticle = id => {
