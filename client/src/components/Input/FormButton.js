@@ -1,8 +1,7 @@
 import React from 'react';
-import './Input.css';
 
 export const FormButton = props => (
-  <button {...props} className="btn button-color">
+  <button {...props} className="btn orange">
     {props.children}
   </button>
 );

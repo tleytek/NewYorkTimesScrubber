@@ -3,3 +3,19 @@ body {
   background-color: #584c46;
   font-family: 'Brawler', serif;
 }
+
+.beige {
+  background-color: #f8ecc2;
+}
+
+.pea-green {
+  background-color: #a3b79a;
+}
+
+.orange {
+  background-color: #e59606;
+}
+
+.orange:hover {
+  background-color: #b97901;
+}

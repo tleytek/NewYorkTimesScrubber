@@ -1,11 +1,9 @@
 import React from 'react';
 import API from '../utils/API';
-import { Row, Container } from './Grid';
+import { Row } from './Grid';
 import { Card, CardHeader, CardBody } from './Card';
-import SavedArticlesCard from './SavedArticlesCard';
 import { FormButton, Input } from './Input';
-import { List, ListItem } from './List';
-import Spinner from './Spinner';
+import { List, ListItem, ListSpinner, ListLink, ListButton } from './List';
 class Home extends React.Component {
   state = {
     searchTerm: '',
@@ -24,10 +22,6 @@ class Home extends React.Component {
     API.getArticles().then(res => {
       this.setState({ savedArticles: res.data });
     });
-  };
-
-  deleteArticle = id => {
-    API.deleteArticle(id).then(res => this.getArticles());
   };
 
   handleInputChange = event => {
@@ -55,21 +49,21 @@ class Home extends React.Component {
     }).then(this.getArticles());
   };
 
-  articleParityCheck = currentArticleUrl => {
+  duplicatePrevention = currentArticleUrl => {
     return this.state.savedArticles.find(savedArticle => {
       return savedArticle.url === currentArticleUrl;
     });
   };
 
-  searchStatus(searchState, searchedItems) {
+  renderContent(searchState, searchedItems) {
     if (searchState && searchedItems.length >= 0) {
-      return <Spinner />;
+      return <ListSpinner />;
     }
     if (!searchState && searchedItems.length > 0) {
       return this.renderList(searchedItems);
     }
     return (
-      <div className="list-group-item" style={{ backgroundColor: `#f8ecc2` }}>
+      <div className="list-group-item beige">
         <div className="row justify-content-center align-items-center">No Articles</div>
       </div>
     );
@@ -77,14 +71,28 @@ class Home extends React.Component {
 
   renderList = listArray =>
     listArray.map(listItem => (
-      <ListItem articleParityCheck={this.articleParityCheck} saveArticle={this.saveArticle} {...listItem} />
+      <ListItem>
+        <ListLink {...listItem} />
+        {this.duplicatePrevention(listItem.web_url) ? (
+          <ListButton className="btn orange mr-3" disabled>
+            Saved
+          </ListButton>
+        ) : (
+          <ListButton
+            className="btn orange mr-3"
+            onClick={() => this.saveArticle({ title: listItem.headline.main, url: listItem.web_url })}
+          >
+            Save
+          </ListButton>
+        )}
+      </ListItem>
     ));
 
   render() {
     let { searchTerm, startYear, endYear, articles, searching } = this.state;
 
     return (
-      <Container>
+      <div>
         <Card>
           <CardHeader>
             <Row justifyContent="center">Search</Row>
@@ -119,10 +127,9 @@ class Home extends React.Component {
             <Row justifyContent="center">Results</Row>
           </CardHeader>
 
-          <List>{this.searchStatus(searching, articles)}</List>
+          <List>{this.renderContent(searching, articles)}</List>
         </Card>
-        {/* <SavedArticlesCard savedArticles={this.state.savedArticles} deleteArticle={this.deleteArticle} /> */}
-      </Container>
+      </div>
     );
   }
 }

@@ -1,9 +1,8 @@
 import React from 'react';
-import './Card.css';
 
 export const CardHeader = ({ children }) => {
   return (
-    <div className="card-header header-color">
+    <div className="card-header pea-green">
       <h3>{children}</h3>
     </div>
   );
