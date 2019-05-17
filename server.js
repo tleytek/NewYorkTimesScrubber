@@ -26,7 +26,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/nytreact'
 const server = http.createServer(app);
 
 //hook up our server to socket.io
-const io = socketIo(server);
+const io = socketIo(express());
 
 io.on('connection', socket => {
   console.log('New client connected ' + socket.id);
