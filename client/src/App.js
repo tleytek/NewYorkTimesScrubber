@@ -5,7 +5,7 @@ import socketIOClient from 'socket.io-client';
 import { Jumbotron } from './components/Jumbotron';
 import { Container } from './components/Grid';
 
-export const socket = socketIOClient('http://localhost:3001/');
+export const socket = socketIOClient(process.env.SOCKETIO_CLIENT || 'http://localhost:3001/');
 
 const App = () => {
   return (
