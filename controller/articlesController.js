@@ -38,10 +38,9 @@ module.exports = {
     db.Article.create(req.body);
   },
   getArticles: (req, res) => {
-    db.articles
-      .find({})
-      //equivalent to the line below, this doesn't require a model
-      // db.Article.find({})
+    // db.articles.find({})
+    //equivalent to the line below, this doesn't require a model
+    db.Article.find({})
       .sort({ date: -1 })
       .then(savedArticles => res.json(savedArticles))
       .catch(err => res.status(422).json(err));
