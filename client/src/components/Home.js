@@ -71,14 +71,15 @@ class Home extends React.Component {
       <ListItem>
         <ListLink {...listItem} />
         {this.duplicatePrevention(listItem.web_url) ? (
-          <ListButton className="btn orange mr-3" disabled>
+          <ListButton className="btn btn-success mr-3" disabled>
             Saved
           </ListButton>
         ) : (
           <ListButton
-            className="btn orange mr-3"
-            onClick={() => this.saveArticle({ title: listItem.headline.main, url: listItem.web_url })}
-          >
+            className="btn btn-success mr-3"
+            onClick={() =>
+              this.saveArticle({ title: listItem.headline.main, url: listItem.web_url })
+            }>
             Save
           </ListButton>
         )}
@@ -108,11 +109,21 @@ class Home extends React.Component {
               <Row justifyContent="center">
                 <label>Begin Year</label>
               </Row>
-              <Input name="startYear" value={startYear} onChange={this.handleInputChange} placeholder="E.g. 2000" />
+              <Input
+                name="startYear"
+                value={startYear}
+                onChange={this.handleInputChange}
+                placeholder="E.g. 2000"
+              />
               <Row justifyContent="center">
                 <label>End Year</label>
               </Row>
-              <Input name="endYear" value={endYear} onChange={this.handleInputChange} placeholder="E.g. 2018" />
+              <Input
+                name="endYear"
+                value={endYear}
+                onChange={this.handleInputChange}
+                placeholder="E.g. 2018"
+              />
               <Row justifyContent="center">
                 <FormButton onClick={this.handleFormSubmit}>Search</FormButton>
               </Row>

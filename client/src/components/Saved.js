@@ -1,8 +1,8 @@
 import React from 'react';
 import API from '../utils/API';
 import { Row } from './Grid';
-import { Card, CardHeader, CardBody } from './Card';
-import { List, ListItem, ListSpinner, ListLink, ListButton } from './List';
+import { Card, CardHeader } from './Card';
+import { List, ListItem, ListSpinner, ListButton } from './List';
 import { socket } from '../App';
 
 class Saved extends React.Component {
@@ -12,19 +12,15 @@ class Saved extends React.Component {
   };
 
   componentDidMount() {
-    // socket.emit('dataRequestFromClient');
     this.getArticles();
-    // socket.on('dataResponseFromServer', data => this.setState({ savedArticles: data }));
   }
 
   getArticles = () => {
     this.setState({ loadingArticles: true });
     socket.emit('getAllArticlesReq');
-    socket.on('getAllArticlesRes', data => this.setState({ savedArticles: data, loadingArticles: false }));
-
-    // API.getArticles().then(res => {
-    //   this.setState({ loadingArticles: false, savedArticles: res.data });
-    // });
+    socket.on('getAllArticlesRes', data =>
+      this.setState({ savedArticles: data, loadingArticles: false })
+    );
   };
 
   deleteArticle = id => {
@@ -37,7 +33,9 @@ class Saved extends React.Component {
         <a className="alert-link mx-2" href={listItem.url}>
           {listItem.title}
         </a>
-        <ListButton className="btn btn-danger mr-3" onClick={() => this.deleteArticle(listItem._id)}>
+        <ListButton
+          className="btn btn-danger mr-3"
+          onClick={() => this.deleteArticle(listItem._id)}>
           Remove
         </ListButton>
       </ListItem>
